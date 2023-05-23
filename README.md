@@ -20,7 +20,7 @@ Another while loop is used to detect an object and calculate its angle. This loo
 
 After the loops end, the video capture is released, and all windows are closed using cap.release() and cv2.destroyAllWindows().
 
-**Installed Modules :**
+**INSTALLED MODULES :**
 
 NumPy
 
