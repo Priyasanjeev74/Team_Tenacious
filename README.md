@@ -20,36 +20,62 @@ Another while loop is used to detect an object and calculate its angle. This loo
 
 After the loops end, the video capture is released, and all windows are closed using cap.release() and cv2.destroyAllWindows().
 
-Installed Modules :
+**Installed Modules :**
 
 NumPy
+
 OpenCV
+
 Time
+
 Matplot
-APPLICATIONS :
+
+**APPLICATIONS :**
+
 
 Real-time Object Detection
+
 Flexibility
+
 Real-time Visualization
+
 Image Saving
+
 Platform Independence
+
 Gaming
+
 VR
+
 Construction
-TEAM MEMBERS
+
+
+**TEAM MEMBERS:**
+
 
 Lokesh J(Lead)
+
 Nanda Kishore R
+
 Tejaswini M
+
 Hussain S
+
 Subhash
+
 Priyanka R
+
 Muni Kishore P
 
-Conclusion:
+
+**Conclusion:**
+
 
 The goal of Angle Detection task is to detect an angle between 2 flat objects in a single image or video sequence. The accuracy of the algorithm depends upon different factors like the camera used, the size of objects, clarity of the image and accurate position. Angle detection is often combined with other factors like define an object,determining a reference point, measure the reference lines and apply trignometry to develop more robust applications that better solve real-life scenarios.
-Contact:
+
+
+**Contact:**
+
  
 For any queries and feedback contact
 priyankaraminepalli@gmail.com
