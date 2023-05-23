@@ -1,9 +1,5 @@
 import cv2
 import numpy as np
-import time
-import matplotlib.pyplot as plt
-from skimage.transform import hough_line, hough_line_peaks
-
 
 def edge_detection(img, blur_ksize=3, threshold1=50, threshold2=50):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -11,9 +7,11 @@ def edge_detection(img, blur_ksize=3, threshold1=50, threshold2=50):
     img_canny = cv2.Canny(img_gaussian, threshold1, threshold2)
 
     return img_canny
+
+
 def draw_lines(img, lines, color=[255, 0, 0], thickness=3):
     for line in lines:
-        for x1,y1,x2,y2 in line:
+        for x1, y1, x2, y2 in line:
             cv2.line(img, (x1, y1), (x2, y2), color, thickness)
 
     if lines is not None:
@@ -34,14 +32,20 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=3):
 
                     # draw line
                     cv2.line(img, (int(x_top), y_top), (int(x_bottom), y_bottom), color, thickness)
+
+
 def get_angle(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 50, 150, apertureSize=3)
     lines = cv2.HoughLines(edges, 1, np.pi/180, 200)
 
+    # Remove the line that prints the detected lines
+
+    # Rest of the code...
+
     # extract the angle
     angle = 0
-    if lines is not None:
+    if lines is not None and len(lines) > 0:
         for line in lines:
             for rho, theta in line:
                 a = np.cos(theta)
@@ -71,66 +75,36 @@ while True:
     if not ret:
         break
 
+    cv2.imshow('frame', frame)
+
+    # wait for 'q' key to start detecting object or exit
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('q'):
+        break
+
+object_detected = False
+
+while not object_detected:
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
     angle = get_angle(frame)
     if angle is not None:
         print("Angle: {:.2f}".format(angle))
-        break # stop capturing frames after the object is detected
+        object_detected = True
 
     cv2.imshow('frame', frame)
-    if cv2.waitKey(1) == ord('q'):
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('q'):
         break
+    elif key == ord('s'):
+        # save the frame as an image
+        filename = "object_image.jpg"
+        cv2.imwrite(filename, frame)
+        print(f"Object image saved as {filename}")
+        object_detected = True
 
 cap.release()
 cv2.destroyAllWindows()
-
-
-
-# capture an image from the default camera
-cap = cv2.VideoCapture(0)
-
-# check if the camera is opened successfully
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-# capture a frame from the camera
-ret, frame = cap.read()
-
-# check if the frame is captured successfully
-if not ret:
-    print("Cannot capture frame")
-    exit()
-
-# crop the captured image to a fixed rectangle around the center of the frame
-height, width = frame.shape[:2]
-crop_size = 200
-x1 = int((width - crop_size) / 2)
-y1 = int((height - crop_size) / 2)
-x2 = x1 + crop_size
-y2 = y1 + crop_size
-frame = frame[y1:y2, x1:x2]
-
-# get the angle between the detected lines in the captured image
-angle = get_angle(frame)
-
-# release the camera
-cap.release()
-
-# plot the image with detected lines (for visualization only)
-image = edge_detection(frame)
-h, theta, d = hough_line(image)
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-ax = axes.ravel()
-
-ax[0].imshow(frame)
-ax[0].set_title('Input image')
-ax[0].set_axis_off()
-
-ax[1].imshow(image, cmap=plt.cm.gray)
-for _, a, d in zip(*hough_line_peaks(h, theta, d)):
-    y0 = (d - 0 * np.cos(a)) / np.sin(a)
-    y1 = (d - image.shape[1] * np.cos(a)) / np.sin(a)
-    ax[1].plot((0, image.shape[1]), (y0, y1), '-r')
-
-plt.tight_layout()
-plt.show()
