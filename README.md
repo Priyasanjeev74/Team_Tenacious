@@ -68,13 +68,17 @@ Priyanka R
 Muni Kishore P
 
 
-**Conclusion:**
+**CONCLUSION:**
 
 
 The goal of Angle Detection task is to detect an angle between 2 flat objects in a single image or video sequence. The accuracy of the algorithm depends upon different factors like the camera used, the size of objects, clarity of the image and accurate position. Angle detection is often combined with other factors like define an object,determining a reference point, measure the reference lines and apply trignometry to develop more robust applications that better solve real-life scenarios.
 
+**ACKNOWLEDGEMENT:**
 
-**Contact:**
+We would like to acknowledge and thank RGMCET and BYTS INDIA for their efforts in organizing the 24-hour hackathon, which brought us together for an exciting event. We are immensely grateful for their commitment to fostering learning, collaboration, and growth. At last this event gave us an unique and enriching experience.
+
+
+**CONTACT:**
 
  
 For any queries and feedback contact
