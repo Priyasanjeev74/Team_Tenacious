@@ -55,7 +55,7 @@ Construction
 
 Lokesh J(Lead)
 
-Nanda Kishore R
+Priyanka R
 
 Tejaswini M
 
@@ -63,7 +63,7 @@ Hussain S
 
 Subhash
 
-Priyanka R
+Nanda Kishore R
 
 Muni Kishore P
 
